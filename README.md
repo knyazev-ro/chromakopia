@@ -20,7 +20,7 @@ cd <папка-проекта>
 ```
 
 ### 4. Установка NVM
-NVM (Node Version Manager) помогает управлять версиями Node.js.
+NVM (Node Version Manager) помогает управлять версиями Node.js. 
 Скачай и установи его:
 
 [NVM на GitHub](https://github.com/nvm-sh/nvm#installing-and-updating)
@@ -39,6 +39,16 @@ composer install
 npm install
 ```
 
-### 7. Готово!
+### 7. Инициализация проекта
+После установки зависимостей выполни следующие команды:
+```sh
+php artisan key:generate
+php artisan storage:link
+php artisan migrate:refresh --seed
+npm run dev
+php artisan serve
+```
+
+### 8. Готово!
 Ты молодец! 🎉
 
