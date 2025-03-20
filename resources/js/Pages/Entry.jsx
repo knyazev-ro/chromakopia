@@ -6,7 +6,7 @@ export default function Entry()
 {
     console.log(route('init'));
     return <>
-    <div className="bg-blue-800 w-100 flex h-10">
+    <div className="bg-blue-800 w-100 flex h-screen">
        init
         </div>
     </>
