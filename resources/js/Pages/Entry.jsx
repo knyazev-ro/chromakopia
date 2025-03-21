@@ -6,7 +6,8 @@ export default function Entry()
 {
     console.log(route('init'));
     return <>
-    <div className="flex items-center justify-center bg-blue-800 w-screen h-screen">
+    <div className="bg-yellow-900 w-100 flex h-screen">
+       init
         </div>
     </>
 }
