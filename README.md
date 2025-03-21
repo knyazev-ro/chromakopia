@@ -50,6 +50,21 @@ GRANT ALL PRIVILEGES ON chromakopia.* TO 'chromakopia_user'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
+```bash
+cp .env.example .env
+
+```
+
+Вставить:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=chromakopia
+DB_USERNAME=chromakopia_user
+DB_PASSWORD=123
+```
+
 ### 7. Инициализация проекта
 После установки зависимостей выполни следующие команды:
 ```sh
