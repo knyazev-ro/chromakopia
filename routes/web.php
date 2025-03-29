@@ -28,3 +28,4 @@ Route::middleware('auth')->group(function () {
 Route::get('/init', [EntryController::class, 'show'])->name('init');
 
 require __DIR__.'/auth.php';
+require __DIR__.'/mobile-web.php';
