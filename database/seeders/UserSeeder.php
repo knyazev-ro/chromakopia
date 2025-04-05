@@ -10,6 +10,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Lauthz\Facades\Enforcer;
+use App\Models\Branch;
 
 class UserSeeder extends Seeder
 {
@@ -22,6 +23,7 @@ class UserSeeder extends Seeder
             'name' => 'Gabe',
             'email' => 'chromakopia@og.com',
             'sign' => Str::random(10),
+            'branch_id' => Branch::query()->inRandomOrder()->value('id'),
             'password' => Hash::make('123'),
         ]);
 
