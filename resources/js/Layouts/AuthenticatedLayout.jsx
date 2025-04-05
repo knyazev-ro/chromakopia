@@ -7,6 +7,9 @@ import { useState } from 'react';
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
+    const {menu} = usePage().props;
+
+    console.log(menu);
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
@@ -19,17 +22,21 @@ export default function AuthenticatedLayout({ header, children }) {
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                    <ApplicationLogo width={"80px"}  className="block h-9 w-auto fill-current text-gray-800" />
                                 </Link>
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                {
+                                    menu.map(menuElement => (
                                 <NavLink
                                     href={route('dashboard')}
                                     active={route().current('dashboard')}
                                 >
-                                    Dashboard
+                                    {menuElement.title}
                                 </NavLink>
+                                    ))
+                                }
                             </div>
                         </div>
 

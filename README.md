@@ -55,6 +55,8 @@ cp .env.example .env
 
 ```
 
+4. Далее выполняем **ЕДИНОРАЗОВО ПРИ ПЕРВОЙ НАСТРОЙКЕ ПРОЕКТА** команду `docker exec coffeebean-backend sh docker/first_start.sh`
+
 Вставить:
 ```env
 DB_CONNECTION=mysql
