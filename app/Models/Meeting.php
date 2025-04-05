@@ -25,6 +25,8 @@ class Meeting extends Model
 
     protected $casts = [
         'format_type' => MeetingFormatType::class,
+        'start_date' => 'datetime',
+        'end_date' => 'datetime',
     ];
     
     public function getFormatTypeLabelAttribute(): string

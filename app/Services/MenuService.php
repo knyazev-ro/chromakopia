@@ -20,14 +20,14 @@ class MenuService
                 'href' => 'calendar.index',
             ],
             [
-                'title' => 'Новое заседание',
+                'title' => 'Протоколы',
                 'icon' => '',
                 'href' => 'calendar.index',
             ],
             [
                 'title' => 'Пользователи',
                 'icon' => '',
-                'href' => 'calendar.index',
+                'href' => 'users.index',
             ],
         ];
 

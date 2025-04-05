@@ -5,9 +5,8 @@ import GuestLayout from './GuestLayout';
 
 export default function Layout({ children }) {
     const { layout } = usePage().props;
-    console.log(layout);
 
-    switch (layout) {
+    const lay = () => {switch (layout) {
         case 1:
             return <GuestLayout>{children}</GuestLayout>;
 
@@ -19,5 +18,11 @@ export default function Layout({ children }) {
 
         default:
             return <GuestLayout>{children}</GuestLayout>;
-    }
+    }}
+
+    return <>
+    <div className='h-screen overflow-y-hidden'>
+        {lay()}
+    </div>
+    </>
 }

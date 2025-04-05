@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+
+
+.fc .fc-button-primary {
+    color: #FFFFFF;
+    background-color: #2b6cef !important;
+    border-color: #FFFFFF !important;
+}
+
+.fc .fc-button-primary:hover {
+    border-color: #2b6cef !important; /* Темно-индиго */
+}
+
+.fc-highlight {
+    background-color: #2b6cef !important; /* Легкий индиго */
+    opacity: 0.2;
+}

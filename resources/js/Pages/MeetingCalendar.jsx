@@ -4,6 +4,8 @@ import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import ruLocale from '@fullcalendar/core/locales/ru';
 import { useState, useMemo, useCallback } from 'react';
+import { router } from '@inertiajs/react';
+import Page from './Layouts/Page';
 
 export default function MeetingCalendar({meetings}) {
 
@@ -12,8 +14,8 @@ export default function MeetingCalendar({meetings}) {
           let meeting = {
             id: e.id,
             title: e.name,
-            start: e.start_date,
-            end: e.end_date,
+            start: new Date(e.start_date),
+            end: new Date(e.end_date),
           };
     
           return meeting;
@@ -23,14 +25,22 @@ export default function MeetingCalendar({meetings}) {
 
       console.log(events);
 
-    const eventContent = (eventInfo) => {
+      const renderEventContent = useCallback((eventInfo) => {
         return (
-            <>
-                <b>{eventInfo.timeText}</b>
-                <i>{eventInfo.event.title}</i>
-            </>
+          <>
+            <div onClick={() => router.get(route('meeting.show', eventInfo.event.id))}>
+              <div className="bg-blue-600 w-full p-2 text-stone-100 font-bold justify-between flex flex-col rounded-md">
+                <div className="w-full text-sm break-words whitespace-normal">
+                  {eventInfo.event.title}
+                </div>
+                <div>
+                    {(eventInfo.timeText)}
+                </div>
+              </div>
+            </div>
+          </>
         );
-    };
+      }, []);
 
     
   const mobilecheck = useMemo(() => {
@@ -51,8 +61,7 @@ export default function MeetingCalendar({meetings}) {
 
 
     return (
-        <div>
-            <h1>календарь заседаний</h1>
+        <Page>
         <FullCalendar
           plugins={[dayGridPlugin, listPlugin, interactionPlugin]}
           initialView={mobilecheck ? 'dayGridDay' : 'dayGridMonth'}
@@ -63,7 +72,7 @@ export default function MeetingCalendar({meetings}) {
           }}
           weekends={false}
           events={events}
-          eventContent={eventContent}
+          eventContent={renderEventContent}
           locales={[ruLocale]}
           locale={'ru'}
           editable={true} // important for activating event interactions!
@@ -78,8 +87,8 @@ export default function MeetingCalendar({meetings}) {
             };
             router.post(route('calendar.dnd', info.event.id), data);
           }}
-          height={"100%"}
+          height={"92%"}
         />
-        </div>
+        </Page>
     );
 }

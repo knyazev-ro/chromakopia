@@ -6,6 +6,7 @@ use App\Http\Controllers\EntryController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\UserController;
 
 Route::get('/test', function(){
     return view('pdf.meeting');
@@ -22,22 +23,11 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('calendar')->controller(CalendarController::class)->group(function(){
         Route::get('/index', 'index')->name('calendar.index');
+        Route::post('/calendar/{meeting}', 'calendarDnD')->name('calendar.dnd');
     });
 
 
-    // Route::prefix('')
-
-
-
-
-
-
-
-
-
-
-
-
+    Route::resource('users', UserController::class);
 
 });
 
