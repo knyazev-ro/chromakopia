@@ -22,7 +22,7 @@ class RoleSeeder extends Seeder
         
         $users->each(function($user) use($faker){
             Enforcer::addRoleForUser("U$user->id", "AU");
-            Enforcer::addRoleForUser("U$user->id", $faker->boolean() ? ($faker->boolean() ? RoleType::DIRECTOR->value : RoleType::COMMITET_DIRECTOR->value) : RoleType::ADMIN->value);
+            Enforcer::addRoleForUser("U$user->id", $faker->boolean() ? ($faker->boolean() ? RoleType::DIRECTOR->value : RoleType::COMMITET_DIRECTOR->value) : ($faker->boolean() ? RoleType::ADMIN->value : RoleType::CHAIRMAN->value));
         });
 
     }

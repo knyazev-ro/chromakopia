@@ -11,6 +11,7 @@ enum RoleType:string
     case ADMIN = 'ADMIN';
     case DIRECTOR = 'DIRECTOR';
     case COMMITET_DIRECTOR = 'COMMITET_DIRECTOR';
+    case CHAIRMAN = 'CHAIRMAN';
 
     public function label():string
     {
@@ -18,6 +19,7 @@ enum RoleType:string
             self::ADMIN => 'Секретарь',
             self::DIRECTOR => 'Член совета директоров',
             self::COMMITET_DIRECTOR => 'Член коммитета совета директоров',
+            self::CHAIRMAN => 'Председатель',
         };
     }
 }
