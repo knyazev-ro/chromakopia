@@ -1,9 +1,9 @@
 import dayGridPlugin from '@fullcalendar/daygrid';
 import FullCalendar from '@fullcalendar/react';
 
-export default function MeetingCalendar() {
+export default function MeetingCalendar({meetings}) {
     const events = [{ title: 'Meeting', start: new Date() }];
-
+    
     const eventContent = (eventInfo) => {
         return (
             <>
