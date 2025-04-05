@@ -17,17 +17,17 @@ class MenuService
             [
                 'title' => "Календарь заседаний",
                 'icon' => '',
-                'href' => '',
+                'href' => 'calendar.index',
             ],
             [
                 'title' => 'Новое заседание',
                 'icon' => '',
-                'href' => '',
+                'href' => 'calendar.index',
             ],
             [
                 'title' => 'Пользователи',
                 'icon' => '',
-                'href' => '',
+                'href' => 'calendar.index',
             ],
         ];
 
@@ -40,27 +40,27 @@ class MenuService
             [
                 'title' => "Календарь заседаний",
                 'icon' => '',
-                // href => route()
+                'href' => 'calendar.index',
             ],
             [
                 'title' => "Ближайшие заседания",
                 'icon' => '',
-                // href => route()
+                'href' => 'calendar.index',
             ],
             [
                 'title' => "Уведомления",
                 'icon' => '',
-                // href => route()
+                'href' => 'calendar.index',
             ],
             [
                 'title' => "Протоколы",
                 'icon' => '',
-                // href => route()
+                'href' => 'calendar.index',
             ],
             [
                 'title' => "Опросники",
                 'icon' => '',
-                // href => route()
+                'href' => 'calendar.index',
             ]
         ];
 

@@ -51,8 +51,19 @@ class HandleInertiaRequests extends Middleware
         ];
     }
 
-    protected function resolveLayoutStyle(Request $request):bool{
-        return (bool)collect(explode('.', Route::currentRouteName()))->filter(fn($e) => $e === 'mb')->count();
+    protected function resolveLayoutStyle(Request $request):int{
+        
+    
+        if(!Auth::user()){
+            return 1;
+        }
+        $mobileOrDesktop = (bool)collect(explode('.', Route::currentRouteName()))->filter(fn($e) => $e === 'mb')->count();
+    
+        if($mobileOrDesktop){
+            return 2;
+        } else {
+            return 3;
+        }
     }
 
     protected function resolveLayout(Request $request){

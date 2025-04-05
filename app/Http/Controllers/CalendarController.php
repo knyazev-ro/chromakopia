@@ -11,6 +11,6 @@ class CalendarController extends Controller
     public function index()
     {
         $meetings = Meeting::all();
-        return Inertia::render('Pages/MeetingCalendar', compact('meetings'));
+        return Inertia::render('MeetingCalendar', compact('meetings'));
     }
 }

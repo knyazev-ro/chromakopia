@@ -5,7 +5,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
-export default function AuthenticatedLayout({ header, children }) {
+export default function ClassicLayout({ header, children }) {
     const user = usePage().props.auth.user;
     const {menu} = usePage().props;
 
@@ -28,13 +28,19 @@ export default function AuthenticatedLayout({ header, children }) {
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 {
-                                    menu.map(menuElement => (
+                                    menu.map((menuElement, idx) => (
+                                        <div
+                                        className='flex justify-center'
+                                        id={idx}
+                                        >
+
                                 <NavLink
-                                    href={route('dashboard')}
-                                    active={route().current('dashboard')}
+                                    href={route(menuElement.href)}
+                                    active={route().current(menuElement.href)}
                                 >
                                     {menuElement.title}
                                 </NavLink>
+                                        </div>
                                     ))
                                 }
                             </div>
