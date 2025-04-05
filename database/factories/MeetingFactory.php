@@ -74,7 +74,6 @@ class MeetingFactory extends Factory
             'name' => fake()->randomElement($meetingNames),
             'start_date' => $start,
             'end_date' => $end,
-            'agenda_id' => Agenda::query()->inRandomOrder()->value('id'), // nullable по желанию
             'format_type' => $this->faker->randomElement([
                 MeetingFormatType::IN_PERSON,
                 MeetingFormatType::REMOTE,

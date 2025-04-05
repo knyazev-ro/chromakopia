@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Agenda;
+use App\Models\Meeting;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,6 +15,9 @@ class AgendaFactory extends Factory
 
     public function definition(): array
     {
+        $start = $this->faker->dateTimeBetween('now', '+1 week');
+        $end = (clone $start)->modify('+2 hours');
+
         $title = [
             'Обсуждение квартальных финансовых отчетов',
             'Планирование стратегии развития на 2025 год',
@@ -59,6 +63,9 @@ class AgendaFactory extends Factory
 
         return [
             'name' => fake()-> randomElement($title),
+            'meeting_id' => Meeting::query()->inRandomOrder()->value('id'),
+            'start_date' => $start,
+            'end_date' => $end,
         ];
     }
 }

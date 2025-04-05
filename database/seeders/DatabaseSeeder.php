@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
             BranchSeeder::class,
             UserSeeder::class,
             RoleSeeder::class,
-            AgendaSeeder::class,
             MeetingSeeder::class,
+            AgendaSeeder::class,
         ]);
     }
 }

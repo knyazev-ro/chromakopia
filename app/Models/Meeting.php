@@ -13,7 +13,6 @@ class Meeting extends Model
         'name',
         'start_date',
         'end_date',
-        'agenda_id',
         'format_type',
         'chariman_id',
         'secretaty_id',
@@ -36,7 +35,7 @@ class Meeting extends Model
 
     public function agenda()
     {
-        return $this->belongsTo(Agenda::class);
+        return $this->hasOne(Agenda::class);
     }
 
     public function chairman()

@@ -11,6 +11,7 @@ class Agenda extends Model
 
     protected $fillable = [
         'name',
+        'meeting_id',
         'start_date',
         'end_date',
     ];
@@ -29,5 +30,10 @@ class Agenda extends Model
     public function agendaOptions()
     {
         return $this->hasMany(AgendaOption::class);
+    }
+
+    public function meeting()
+    {
+        return $this->belongsTo(Meeting::class);
     }
 }
