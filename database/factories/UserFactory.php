@@ -25,7 +25,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake('ru_RU')->name(),
             'email' => fake()->unique()->safeEmail(),
             'sign' => Str::random(10),
             'branch_id' => Branch::query()->inRandomOrder()->value('id'),
