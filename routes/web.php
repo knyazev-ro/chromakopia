@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::prefix('calendar')->controller(CalendarController::class)->group(function(){
-        
+        Route::get('/index', 'index');
     });
 
 
