@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\MeetingFormatType;
 use App\Models\Agenda;
 use App\Models\AgendaOption;
+use App\Models\Branch;
 use App\Models\Meeting;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -37,7 +38,8 @@ class MeetingController extends Controller
     public function create()
     {
         $meetingTypes = MeetingFormatType::all();
-        return Inertia::render('Meetings/EditMeeting', compact( 'meetingTypes'));
+        $branches = Branch::all()->map(fn($e) => ['value' => $e->id, 'label' => $e->name]);
+        return Inertia::render('Meetings/EditMeeting', compact( 'meetingTypes', 'branches'));
     }
 
     // Сохранить новую встречу
@@ -79,7 +81,8 @@ class MeetingController extends Controller
     {
         $meeting->load(['agenda', 'chairman', 'secretary']);
         $meetingTypes = MeetingFormatType::all();
-        return Inertia::render('Meetings/EditMeeting', compact('meeting', 'meetingTypes'));
+        $branches = Branch::all()->map(fn($e) => ['value' => $e->id, 'label' => $e->name]);
+        return Inertia::render('Meetings/EditMeeting', compact('meeting', 'meetingTypes', 'branches'));
     }
 
     // Обновить информацию о встрече

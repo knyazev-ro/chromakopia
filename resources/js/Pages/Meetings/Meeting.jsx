@@ -25,6 +25,7 @@ import {
 } from '@mui/icons-material';
 import Page from '../Layouts/Page';
 import { PencilIcon } from '@heroicons/react/24/outline'
+import { router } from '@inertiajs/react';
 
 export default function Meeting({ meeting, agenda })
 {
@@ -111,7 +112,7 @@ export default function Meeting({ meeting, agenda })
         <Page>
         <Card sx={{ mb: 3, boxShadow: 3 }}>
           <CardContent>
-            <div className='flex justify-between w-full'>
+            <div className='flex justify-between w-full px-2 flex-wrap'>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
               <Typography variant="h4" component="h1">
                 {meeting?.name || 'Название собрания не указано'}
@@ -124,7 +125,12 @@ export default function Meeting({ meeting, agenda })
                 />
               )}
             </Box>
-            <div>
+            <div className='cursor-pointer p-2'
+            onClick={() => {
+                router.get(route('meetings.edit',  meeting?.id))
+                console.log(meeting.id)
+            }}
+            >
             <PencilIcon className="h-5 w-5 text-gray-500" />
             </div>
             </div>

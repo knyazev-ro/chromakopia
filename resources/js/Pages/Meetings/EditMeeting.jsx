@@ -23,16 +23,17 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { useState } from 'react';
 import AgendaOptions from './AgendaOptions';
 
-export default function EditMeeting({ meeting, meetingTypes }) {
+export default function EditMeeting({ meeting, meetingTypes, branches }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 const [agenda, setAgenda] = useState(meeting?.agenda?.questions || ['']);
   const { data, setData, put, errors, processing } = useForm({
     name: meeting?.name || '',
     start_date: new Date(meeting?.start_date),
     end_date: new Date(meeting?.end_date),
-    format_type: meeting?.format_type?.value || '',
+    format_type: meeting?.format_type || 2,
     chairman_id: meeting?.chairman?.id || '',
     secretary_id: meeting?.secretary?.id || '',
+    branch_id: meeting?.branch_id ?? null,
   });
 
     // Обработчик открытия модалки
@@ -112,6 +113,25 @@ const [agenda, setAgenda] = useState(meeting?.agenda?.questions || ['']);
           </Select>
           {errors.format_type && (
             <FormHelperText>{errors.format_type}</FormHelperText>
+          )}
+        </FormControl>
+
+                {/* Формат проведения */}
+        <FormControl fullWidth margin="normal" error={!!errors.format_type}>
+          <InputLabel>Филиал</InputLabel>
+          <Select
+            value={data.branch_id}
+            onChange={(e) => setData('format_type', e.target.value)}
+            label="Формат проведения"
+          >
+            {branches.map((type) => (
+              <MenuItem key={type.value} value={type.value}>
+                {type.label}
+              </MenuItem>
+            ))}
+          </Select>
+          {errors.branch_id && (
+            <FormHelperText>{errors.branch_id}</FormHelperText>
           )}
         </FormControl>
 
