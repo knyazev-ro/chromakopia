@@ -23,9 +23,7 @@ Route::get('/test', function(){
     return view('pdf.notification');
 });
 
-Route::get('/', function () {
-    return Redirect::to(route('calendar.index'));
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [CalendarController::class, 'closestMeeting'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agenda;
+use App\Models\AgendaOption;
 use App\Models\Meeting;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -34,5 +38,24 @@ class CalendarController extends Controller
         $meeting->save();
 
         return Redirect::back();
+    }
+
+    public function closestMeeting(){
+        $meeting = Meeting::where('branch_id', Auth::user()->branch_id)
+        ->where('director_type', Auth::user()->type)->where('start_date', '>', Carbon::now())->orderBy('start_date', 'asc')->first();
+        
+        $agenda = Agenda::query()->where('meeting_id', $meeting->id)
+        ->first();
+        if($agenda){
+            $agenda->load('agendaOptions');
+            $agenda->agendaOptions = $agenda->agendaOptions->map(function(AgendaOption $option){
+                $option->setAttribute('agreed', User::whereIn('id', $option->agreed)->get());
+                $option->setAttribute('against', User::whereIn('id', $option->against)->get());
+                $option->setAttribute('abstained', User::whereIn('id', $option->abstained)->get());
+                return $option;
+            });
+        }
+
+        return Inertia::render('CalendarLatest', compact('meeting', 'agenda'));
     }
 }
