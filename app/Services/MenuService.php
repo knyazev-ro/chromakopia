@@ -32,7 +32,7 @@ class MenuService
             [
                 'title' => 'Протоколы',
                 'icon' => '',
-                'href' => 'calendar.index',
+                'href' => 'meetings.index',
             ],
             [
                 'title' => 'Пользователи',
@@ -48,29 +48,29 @@ class MenuService
     {
         $menu = [
             [
-                'title' => "Календарь заседаний",
+                'title' => "Все заседания",
                 'icon' => '',
-                'href' => 'calendar.index',
+                'href' => 'calendar.get-all-meetings',
             ],
             [
-                'title' => "Ближайшие заседания",
+                'title' => "Мой календарь",
                 'icon' => '',
                 'href' => 'calendar.index',
             ],
             [
                 'title' => "Уведомления",
                 'icon' => '',
-                'href' => 'calendar.index',
+                'href' => 'users.index',
             ],
             [
                 'title' => "Протоколы",
                 'icon' => '',
-                'href' => 'calendar.index',
+                'href' => 'users.update',
             ],
             [
                 'title' => "Опросники",
                 'icon' => '',
-                'href' => 'calendar.index',
+                'href' => 'users.delete',
             ]
         ];
 
