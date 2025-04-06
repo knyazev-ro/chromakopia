@@ -36,7 +36,8 @@ class MeetingController extends Controller
     // Показать форму для создания новой встречи
     public function create()
     {
-        // Логика для создания встречи (например, отдать форму)
+        $meetingTypes = MeetingFormatType::all();
+        return Inertia::render('Meetings/EditMeeting', compact( 'meetingTypes'));
     }
 
     // Сохранить новую встречу

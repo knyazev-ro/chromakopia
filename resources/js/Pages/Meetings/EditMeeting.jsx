@@ -25,14 +25,14 @@ import AgendaOptions from './AgendaOptions';
 
 export default function EditMeeting({ meeting, meetingTypes }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-const [agenda, setAgenda] = useState(meeting.agenda?.questions || ['']);
+const [agenda, setAgenda] = useState(meeting?.agenda?.questions || ['']);
   const { data, setData, put, errors, processing } = useForm({
-    name: meeting.name || '',
-    start_date: new Date(meeting.start_date),
-    end_date: new Date(meeting.end_date),
-    format_type: meeting.format_type?.value || '',
-    chairman_id: meeting.chairman?.id || '',
-    secretary_id: meeting.secretary?.id || '',
+    name: meeting?.name || '',
+    start_date: new Date(meeting?.start_date),
+    end_date: new Date(meeting?.end_date),
+    format_type: meeting?.format_type?.value || '',
+    chairman_id: meeting?.chairman?.id || '',
+    secretary_id: meeting?.secretary?.id || '',
   });
 
     // Обработчик открытия модалки

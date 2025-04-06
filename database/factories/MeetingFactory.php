@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Agenda;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Enums\MeetingFormatType;
+use App\Models\Branch;
 
 class MeetingFactory extends Factory
 {
@@ -81,6 +82,7 @@ class MeetingFactory extends Factory
             ]),
             'chariman_id' => User::query()->inRandomOrder()->value('id'),
             'secretaty_id' => User::query()->inRandomOrder()->value('id'),
+            'branch_id' => Branch::query()->inRandomOrder()->value('id'),
         ];
     }
 }

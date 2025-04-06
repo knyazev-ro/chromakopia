@@ -8,9 +8,9 @@ import { router } from '@inertiajs/react';
 import Page from './Layouts/Page';
 
 export default function MeetingCalendar({meetings}) {
-
+console.log(meetings)
     const events = useMemo(() =>
-        meetings.map((e) => {
+        meetings?.map((e) => {
           let meeting = {
             id: e.id,
             title: e.name,
@@ -19,7 +19,7 @@ export default function MeetingCalendar({meetings}) {
           };
     
           return meeting;
-        }),
+        }) ?? [],
         [meetings],
       );
 

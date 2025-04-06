@@ -23,6 +23,8 @@ import {
   Link as LinkIcon,
   Person as PersonIcon
 } from '@mui/icons-material';
+import Page from '../Layouts/Page';
+import { PencilIcon } from '@heroicons/react/24/outline'
 
 export default function Meeting({ meeting, agenda })
 {
@@ -39,7 +41,7 @@ export default function Meeting({ meeting, agenda })
   };
     
       const renderVotingSection = (title, users, icon, color) => {
-        const safeUsers = Array.isArray(users) ? users : [];
+        const safeUsers = Object.values(users) ?? [];
         
         return (
           <Box sx={{ mb: 3 }}>
@@ -103,11 +105,13 @@ export default function Meeting({ meeting, agenda })
         );
       };
     
-      const agendaOptions = agenda?.agenda_options || {};
-    
+      const agendaOptions = agenda?.agenda_options[0] || {};
+
       return (
+        <Page>
         <Card sx={{ mb: 3, boxShadow: 3 }}>
           <CardContent>
+            <div className='flex justify-between w-full'>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
               <Typography variant="h4" component="h1">
                 {meeting?.name || 'Название собрания не указано'}
@@ -120,6 +124,10 @@ export default function Meeting({ meeting, agenda })
                 />
               )}
             </Box>
+            <div>
+            <PencilIcon className="h-5 w-5 text-gray-500" />
+            </div>
+            </div>
     
             <Stack spacing={1} sx={{ mb: 3 }}>
               <Typography variant="subtitle1">
@@ -143,31 +151,33 @@ export default function Meeting({ meeting, agenda })
               <Typography variant="h5" gutterBottom>
                 Повестка дня: {agenda?.name || 'Название повестки не указано'}
               </Typography>
-    
+              <div className='flex gap-6 justify-start flex-wrap'>
               {renderVotingSection(
                 'Проголосовали ЗА',
-                agendaOptions?.agreed,
+                agendaOptions?.agreed ?? [],
                 <AgreedIcon color="success" />,
                 'success'
               )}
     
               {renderVotingSection(
                 'Проголосовали ПРОТИВ',
-                agendaOptions?.against,
+                agendaOptions?.against ?? [],
                 <AgainstIcon color="error" />,
                 'error'
               )}
     
               {renderVotingSection(
                 'Воздержались',
-                agendaOptions?.abstained,
+                agendaOptions?.abstained ?? [],
                 <AbstainedIcon color="warning" />,
                 'warning'
               )}
+              </div>
     
               {renderAttachments(agendaOptions?.attachments)}
             </Box>
           </CardContent>
         </Card>
+        </Page>
       );
     }

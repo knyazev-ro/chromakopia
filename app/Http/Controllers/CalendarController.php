@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Meeting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
 
@@ -11,7 +12,7 @@ class CalendarController extends Controller
 {
     public function index(): \Inertia\Response
     {
-        $meetings = Meeting::all();
+        $meetings = Meeting::where('branch_id', Auth::user()->branch_id)->get();
         return Inertia::render('MeetingCalendar', compact('meetings'));
     }
 

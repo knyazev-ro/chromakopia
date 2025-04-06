@@ -22,7 +22,7 @@ class MenuService
             [
                 'title' => "Создать заседание",
                 'icon' => '',
-                'href' => 'calendar.index',
+                'href' => 'meetings.create',
             ],
             [
                 'title' => 'Протоколы',

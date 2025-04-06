@@ -16,6 +16,7 @@ class Meeting extends Model
         'format_type',
         'chariman_id',
         'secretaty_id',
+        'branch_id',
     ];
 
     protected $appends = [
@@ -46,5 +47,10 @@ class Meeting extends Model
     public function secretary()
     {
         return $this->belongsTo(User::class, 'secretaty_id');
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class, 'branch_id');
     }
 }
