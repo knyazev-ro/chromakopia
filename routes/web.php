@@ -3,6 +3,7 @@
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EntryController;
+use App\Http\Controllers\MeetingController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::resource('users', UserController::class);
+    Route::resource('meetings', MeetingController::class);
 
 });
 

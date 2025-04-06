@@ -20,6 +20,11 @@ class MenuService
                 'href' => 'calendar.index',
             ],
             [
+                'title' => "Создать заседание",
+                'icon' => '',
+                'href' => 'calendar.index',
+            ],
+            [
                 'title' => 'Протоколы',
                 'icon' => '',
                 'href' => 'calendar.index',
