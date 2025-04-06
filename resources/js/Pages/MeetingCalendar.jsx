@@ -28,8 +28,10 @@ export default function MeetingCalendar({meetings}) {
       const renderEventContent = useCallback((eventInfo) => {
         return (
           <>
-            <div onClick={() => router.get(route('meeting.show', eventInfo.event.id))}>
-              <div className="bg-blue-600 w-full p-2 text-stone-100 font-bold justify-between flex flex-col rounded-md">
+            <div
+            className='cursor-pointer group' 
+            onClick={() => router.get(route('meetings.show', eventInfo.event.id))}>
+              <div className="bg-blue-600 group-active:bg-blue-800 group-hover:bg-blue-500 w-full p-2 text-stone-100 font-bold justify-between flex flex-col rounded-md">
                 <div className="w-full text-sm break-words whitespace-normal">
                   {eventInfo.event.title}
                 </div>

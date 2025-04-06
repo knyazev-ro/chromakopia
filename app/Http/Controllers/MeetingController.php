@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Enums\MeetingFormatType;
+use App\Models\Agenda;
+use App\Models\AgendaOption;
 use App\Models\Meeting;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -56,7 +59,18 @@ class MeetingController extends Controller
     // Показать конкретную встречу
     public function show(Meeting $meeting)
     {
-        return response()->json($meeting);
+        $meeting->load(['agenda', 'chairman', 'secretary']);
+        $meetingTypes = MeetingFormatType::all();
+        $agenda = Agenda::query()->where('meeting_id', $meeting->id)
+        ->first()
+        ->load('agendaOptions');
+        $agenda->agendaOptions = $agenda->agendaOptions->map(function(AgendaOption $option){
+            $option->setAttribute('agreed', User::whereIn('id', $option->agreed)->get());
+            $option->setAttribute('against', User::whereIn('id', $option->against)->get());
+            $option->setAttribute('abstained', User::whereIn('id', $option->abstained)->get());
+            return $option;
+        });
+        return Inertia::render('Meetings/Meeting', compact('meeting', 'meetingTypes', 'agenda'));
     }
 
     // Показать форму для редактирования встречи

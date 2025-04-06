@@ -7,7 +7,7 @@ export default function ApplicationLogo(props) {
             width={width}
             height={height}
             alt=""
-            class="d-none d-sm-block"
+            className="d-none d-sm-block"
         />
     );
 }

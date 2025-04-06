@@ -21,9 +21,11 @@ import { DateTimePicker } from '@mui/x-date-pickers';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { useState } from 'react';
+import AgendaOptions from './AgendaOptions';
 
 export default function EditMeeting({ meeting, meetingTypes }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+const [agenda, setAgenda] = useState(meeting.agenda?.questions || ['']);
   const { data, setData, put, errors, processing } = useForm({
     name: meeting.name || '',
     start_date: new Date(meeting.start_date),
@@ -59,6 +61,8 @@ export default function EditMeeting({ meeting, meetingTypes }) {
 
         {/* Дата и время начала */}
         <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <div className='flex gap-4'>
+
           <DateTimePicker
             label="Дата и время начала"
             value={data.start_date}
@@ -89,6 +93,7 @@ export default function EditMeeting({ meeting, meetingTypes }) {
               />
             )}
           />
+            </div>
         </LocalizationProvider>
 
         {/* Формат проведения */}
@@ -149,13 +154,22 @@ export default function EditMeeting({ meeting, meetingTypes }) {
         <DialogTitle>Новое модальное окно</DialogTitle>
         
         <DialogContent>
-          {/* Пока оставляем содержимое пустым */}
+        <AgendaOptions agenda={agenda} setAgenda={setAgenda} />
           <Box sx={{ height: 200 }} />
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={handleCloseModal}>Закрыть</Button>
-        </DialogActions>
+  <Button onClick={handleCloseModal}>Отмена</Button>
+  <Button 
+    onClick={() => {
+      // Здесь логика сохранения agenda
+      handleCloseModal();
+    }}
+    variant="contained"
+  >
+    Сохранить
+  </Button>
+</DialogActions>
       </Dialog>
     </Container>
   );
