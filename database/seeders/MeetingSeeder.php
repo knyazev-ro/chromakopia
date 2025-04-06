@@ -16,7 +16,7 @@ class MeetingSeeder extends Seeder
     public function run(): void
     {
         Meeting::factory()
-        ->count(100)
+        ->count(150)
         ->create() // Сначала создаём встречи
         ->each(function ($meeting) { // Затем для каждой встречи создаём связанные записи
             Agenda::factory()

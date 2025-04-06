@@ -34,13 +34,14 @@ Route::middleware('auth')->group(function () {
     Route::prefix('calendar')->controller(CalendarController::class)->group(function(){
         Route::get('/index', 'index')->name('calendar.index');
         Route::post('/calendar/{meeting}', 'calendarDnD')->name('calendar.dnd');
+        Route::get('/index/get-all', 'getAllMeetings')->name('calendar.get-all-meetings');
     });
 
 
     Route::resource('users', UserController::class);
     Route::resource('meetings', MeetingController::class);
 
-    Route::post('/agenda-option/update/{id}', [AgendaController::class, 'agendaOptionUpdate'])->name('agenda-option.update');
+    Route::post('/agenda-option/update/{id?}', [AgendaController::class, 'agendaOptionUpdate'])->name('agenda-option.update');
 
 });
 

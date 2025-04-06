@@ -25,6 +25,7 @@ class UserSeeder extends Seeder
             'sign' => Str::random(10),
             'branch_id' => Branch::query()->inRandomOrder()->value('id'),
             'password' => Hash::make('123'),
+            'type' => 1,
         ]);
 
         Enforcer::addRoleForUser("U$admin->id", RoleType::ADMIN->value);

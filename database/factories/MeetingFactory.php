@@ -83,6 +83,7 @@ class MeetingFactory extends Factory
             'chariman_id' => User::query()->inRandomOrder()->value('id'),
             'secretaty_id' => User::query()->inRandomOrder()->value('id'),
             'branch_id' => Branch::query()->inRandomOrder()->value('id'),
+            'director_type' => fake()->numberBetween(1,2),
         ];
     }
 }

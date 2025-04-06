@@ -15,7 +15,12 @@ class MenuService
 
         $menu = [
             [
-                'title' => "Календарь заседаний",
+                'title' => "Все заседания",
+                'icon' => '',
+                'href' => 'calendar.get-all-meetings',
+            ],
+            [
+                'title' => "Мой календарь",
                 'icon' => '',
                 'href' => 'calendar.index',
             ],

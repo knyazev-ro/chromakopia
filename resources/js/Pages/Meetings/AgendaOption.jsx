@@ -30,12 +30,12 @@ import { router } from '@inertiajs/react';
 
 export default function AgendaOption({ agenda, option }) {
 
-      const renderVotingSection = (option, title, users, icon, color) => {
+      const renderVotingSection = (type, option, title, users, icon, color) => {
         const safeUsers = Object.values(users) ?? [];
         
         return (
         <div className='cursor-pointer active:bg-stone-100 transition-colors duration-200 ease-in-out hover:bg-gray-200 py-2 px-4 rounded-md'
-        onClick={() => router.post(route('agenda-option.update', option.id), option)}
+        onClick={() => router.post(route('agenda-option.update', option.id), {...option, type:type})}
         >
           <Box sx={{ mb: 3 }}>
             <Typography variant="h6" sx={{ mb: 1, color }}>
@@ -112,6 +112,7 @@ export default function AgendaOption({ agenda, option }) {
                 </Typography>
                 <div className="flex flex-wrap justify-start gap-6">
                     {renderVotingSection(
+                        1,
                         option,
                         'Проголосовали ЗА',
                         option?.agreed ?? [],
@@ -120,6 +121,7 @@ export default function AgendaOption({ agenda, option }) {
                     )}
 
                     {renderVotingSection(
+                        2,
                         option,
                         'Проголосовали ПРОТИВ',
                         option?.against ?? [],
@@ -128,6 +130,7 @@ export default function AgendaOption({ agenda, option }) {
                     )}
 
                     {renderVotingSection(
+                        3,
                         option,
                         'Воздержались',
                         option?.abstained ?? [],

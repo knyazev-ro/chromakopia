@@ -12,6 +12,14 @@ class CalendarController extends Controller
 {
     public function index(): \Inertia\Response
     {
+        $meetings = Meeting::where('branch_id', Auth::user()->branch_id)
+            ->where('director_type', Auth::user()->type)->get();
+        return Inertia::render('MeetingCalendar', compact('meetings'));
+    }
+
+    
+    public function getAllMeetings(): \Inertia\Response
+    {
         $meetings = Meeting::where('branch_id', Auth::user()->branch_id)->get();
         return Inertia::render('MeetingCalendar', compact('meetings'));
     }

@@ -5,11 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Agenda;
 use App\Models\AgendaOption;
 use App\Models\Meeting;
+use App\Services\MediaService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class AgendaController extends Controller
 {
+
+    public function __construct(protected MediaService $mediaService) {
+    }
+
+
     // Отображение всех записей
     public function index(Request $request)
     {
@@ -88,18 +96,42 @@ class AgendaController extends Controller
         return redirect()->back()->with('message', 'Agenda deleted successfully!');
     }
 
-    public function agendaOptionUpdate(Request $request, int|bool $id=null){
+    public function agendaOptionUpdate(Request $request, int|null $id=null){
         $validated = $request->validate([
             'agenda_id' => 'integer|exists:agendas,id',
             'agreed' => 'array|nullable',
             'against' => 'array|nullable',
             'abstained' => 'array|nullable',
             'attachments' => 'array|nullable',
+            'type' => 'integer|nullable',
         ]);
 
+        $currentUserId = Auth::id();
+
         if($id){
-            // AgendaOption::
+            $agendaOption = AgendaOption::findOrFail($id);
+            $agreed = array_values(array_filter($agendaOption->agreed, fn($e) => $e !== $currentUserId));
+            $against = array_values(array_filter($agendaOption->against, fn($e) => $e !== $currentUserId));
+            $abstained = array_values(array_filter($agendaOption->abstained, fn($e) => $e !== $currentUserId));
+            // $agendaOption->attachments = $this->mediaService->handleFileUploads($$validated['attachments'], 'AgendaOption', 'agenda');
+            
+            match($validated['type']){
+                1 => $agreed[] = $currentUserId,//ЗА
+                2 => $against[] = $currentUserId,//Против
+                3 => $abstained[] = $currentUserId,//Воздержались
+            };
+
+            $agendaOption->agreed = $agreed;
+            $agendaOption->against = $against; 
+            $agendaOption->abstained = $abstained; 
+
+            $agendaOption->save();
+        } else {
+
+            AgendaOption::create($validated);
         }
+
+        return Redirect::back();
 
 
     }

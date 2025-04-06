@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Enums\DirectorType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -23,7 +25,21 @@ class User extends Authenticatable
         'password',
         'branch_id',
         'sign',
+        'type',
     ];
+
+
+    protected $appends = [
+        'type_label',
+    ];
+
+    protected $casts = [
+        'type' => DirectorType::class,
+    ];
+
+    public function getTypeLabelAttribute(){
+        return $this->type->label();
+    }
 
     /**
      * The attributes that should be hidden for serialization.

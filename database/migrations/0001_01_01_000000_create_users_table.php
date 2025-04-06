@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('branch_id')->nullable()->constrained('branches');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedTinyInteger('type')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

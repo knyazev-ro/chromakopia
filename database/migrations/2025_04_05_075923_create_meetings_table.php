@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('chariman_id')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('secretaty_id')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('branch_id')->constrained('branches');
+            $table->unsignedTinyInteger('director_type')->default(1);
             $table->timestamps();
         });
     }
