@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\UserController;
 
+use App\Http\Controllers\PDFnotification1F;
+use App\Http\Controllers\PDFprojectResolve;
+use App\Http\Controllers\PDFsupportSheet;
+
+Route::get('/notification-pdf', [PDFnotification1F::class, 'generateNotice']);
+Route::get('/project-resolve-pdf', [PDFprojectResolve::class, 'generateNotice']);
+Route::get('/support-sheet-pdf', [PDFsupportSheet::class, 'generateNotice']);
+
 Route::get('/test', function(){
     return view('pdf.meeting');
 });
