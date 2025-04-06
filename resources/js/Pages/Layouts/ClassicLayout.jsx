@@ -141,12 +141,29 @@ export default function ClassicLayout({ header, children }) {
                     }
                 >
                     <div className="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink
+
+                    {
+                                    menu.map((menuElement, idx) => (
+                                        <div
+                                        className='flex justify-center'
+                                        id={idx}
+                                        >
+
+                                <ResponsiveNavLink
+                                    href={route(menuElement.href)}
+                                    active={route().current(menuElement.href)}
+                                >
+                                    {menuElement.title}
+                                    </ResponsiveNavLink>
+                                        </div>
+                                    ))
+                                }
+                        {/* <ResponsiveNavLink
                             href={route('dashboard')}
                             active={route().current('dashboard')}
                         >
                             Dashboard
-                        </ResponsiveNavLink>
+                        </ResponsiveNavLink> */}
                     </div>
 
                     <div className="border-t border-gray-200 pb-1 pt-4">

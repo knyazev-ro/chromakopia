@@ -24,7 +24,7 @@ import {
   Person as PersonIcon
 } from '@mui/icons-material';
 import Page from '../Layouts/Page';
-import { PencilIcon } from '@heroicons/react/24/outline'
+import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline'
 import { router } from '@inertiajs/react';
 import AgendaOption from './AgendaOption';
 
@@ -61,13 +61,24 @@ export default function Meeting({ meeting, agenda })
                 />
               )}
             </Box>
+            <div className='items-center flex justify-center'>
+
+
             <div className='cursor-pointer p-2'
             onClick={() => {
                 router.get(route('meetings.edit',  meeting?.id))
-                console.log(meeting.id)
             }}
             >
             <PencilIcon className="h-5 w-5 text-gray-500" />
+            </div>
+
+            <div className='cursor-pointer p-2'
+            onClick={() => {
+                router.delete(route('meetings.destroy',  meeting.id))
+            }}
+            >
+            <TrashIcon className="h-5 w-5 text-red-500" />
+            </div>
             </div>
             </div>
     

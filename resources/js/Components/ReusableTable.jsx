@@ -15,6 +15,7 @@ const ReusableTable = ({
   onPageChange,
   onRowsPerPageChange,
   title,
+  additionl,
 }) => {
   const table = useReactTable({
     data,
@@ -24,7 +25,11 @@ const ReusableTable = ({
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden', padding: 2 }}>
+        <div className='flex justify-between py-2'>
       {title && <h2 className="text-xl font-bold text-blue-500 mb-4">{title}</h2>}
+        
+        {additionl()}
+        </div>
 
       <TableContainer>
         <Table>
@@ -32,7 +37,7 @@ const ReusableTable = ({
             {table.getHeaderGroups().map(headerGroup => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map(header => (
-                  <TableCell key={header.id} className="font-bold bg-blue-500 text-white">
+                  <TableCell key={header.id} className="font-bold bg-blue-100 text-white">
                     {flexRender(header.column.columnDef.header, header.getContext())}
                   </TableCell>
                 ))}

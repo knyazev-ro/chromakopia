@@ -107,8 +107,8 @@ export default function AgendaOption({ agenda, option }) {
             <Box sx={{ mb: 4 }}>
                 {/* Исправленное отображение названия повестки */}
                 <Typography variant="h5" gutterBottom>
-                    Повестка дня:{' '}
-                    {agenda?.name || 'Название повестки не указано'}
+                    Вопрос дня:{' '}
+                    {option?.question || 'Название повестки не указано'}
                 </Typography>
                 <div className="flex flex-wrap justify-start gap-6">
                     {renderVotingSection(

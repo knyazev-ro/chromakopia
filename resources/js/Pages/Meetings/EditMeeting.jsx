@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm } from '@inertiajs/react';
+import { router, useForm } from '@inertiajs/react';
 import {
     Container,
     TextField,
@@ -23,9 +23,23 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { useState } from 'react';
 import AgendaOptions from './AgendaOptions';
 
-export default function EditMeeting({ meeting, meetingTypes, branches }) {
+export default function EditMeeting({ meeting, meetingTypes, branches, agenda }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-const [agenda, setAgenda] = useState(meeting?.agenda?.questions || ['']);
+
+    const [agendaData, setAgendaData] = useState({
+        name: agenda?.name || '',
+        start_date: agenda?.start_date ? new Date(agenda.start_date) : null,
+        end_date: agenda?.end_date ? new Date(agenda.end_date) : null,
+        options: agenda?.agendaOptions?.map(option => ({
+            question: option.question,
+            agreed: option.agreed,
+            against: option.against,
+            abstained: option.abstained,
+            attachments: option.attachments
+        })) || []
+    });
+
+
   const { data, setData, put, errors, processing } = useForm({
     name: meeting?.name || '',
     start_date: new Date(meeting?.start_date),
@@ -36,6 +50,8 @@ const [agenda, setAgenda] = useState(meeting?.agenda?.questions || ['']);
     branch_id: meeting?.branch_id ?? null,
   });
 
+  console.log(agenda);
+
     // Обработчик открытия модалки
     const handleOpenModal = () => setIsModalOpen(true);
     // Обработчик закрытия модалки
@@ -43,7 +59,7 @@ const [agenda, setAgenda] = useState(meeting?.agenda?.questions || ['']);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    put(route('meetings.update', meeting.id));
+    router.post(route('meetings.update', meeting?.id ?? null), {...data, agenda:agendaData});
   };
 
   return (
@@ -121,10 +137,10 @@ const [agenda, setAgenda] = useState(meeting?.agenda?.questions || ['']);
           <InputLabel>Филиал</InputLabel>
           <Select
             value={data.branch_id}
-            onChange={(e) => setData('format_type', e.target.value)}
+            onChange={(e) => setData('branch_id', e.target.value)}
             label="Формат проведения"
           >
-            {branches.map((type) => (
+            {branches?.map((type) => (
               <MenuItem key={type.value} value={type.value}>
                 {type.label}
               </MenuItem>
@@ -174,11 +190,12 @@ const [agenda, setAgenda] = useState(meeting?.agenda?.questions || ['']);
         <DialogTitle>Новое модальное окно</DialogTitle>
         
         <DialogContent>
-        <AgendaOptions agenda={agenda} setAgenda={setAgenda} />
+        <AgendaOptions agendaData={agendaData} setAgendaData={setAgendaData} />
           <Box sx={{ height: 200 }} />
         </DialogContent>
 
         <DialogActions>
+        {agenda?.id && <Button variant='contained' color='warning' onClick={() => router.delete(route('agenda.delete', agenda?.id))}>Удалить</Button>}
   <Button onClick={handleCloseModal}>Отмена</Button>
   <Button 
     onClick={() => {

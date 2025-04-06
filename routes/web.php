@@ -39,9 +39,11 @@ Route::middleware('auth')->group(function () {
 
 
     Route::resource('users', UserController::class);
-    Route::resource('meetings', MeetingController::class);
+    Route::resource('meetings', MeetingController::class)->except('update', 'store');
+    Route::post('/meetings/update{id?}', [MeetingController::class, 'update'])->name('meetings.update');
 
     Route::post('/agenda-option/update/{id?}', [AgendaController::class, 'agendaOptionUpdate'])->name('agenda-option.update');
+    Route::delete('/agenda/delete/{agenda}', [AgendaController::class, 'destroy'])->name('agenda.delete');
 
 });
 

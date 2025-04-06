@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('agenda_options', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('agenda_id')->constrained('agendas');
+            $table->string('question');
+            $table->foreignId('agenda_id')->constrained('agendas')->onDelete('cascade');
             $table->json('agreed')->nullable();
             $table->json('against')->nullable();
             $table->json('abstained')->nullable();

@@ -17,6 +17,7 @@ class AgendaOptionFactory extends Factory
     {
         return [
             'agenda_id' => Agenda::query()->inRandomOrder()->value('id'),
+            'question' => fake()->sentence(),
             'agreed' => $this->faker->randomElements(range(1, 10), rand(1, 5)),
             'against' => $this->faker->randomElements(range(1, 10), rand(0, 3)),
             'abstained' => $this->faker->randomElements(range(1, 10), rand(0, 2)),

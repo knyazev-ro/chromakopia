@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import ReusableTable from '@/Components/ReusableTable';
 import Page from '../Layouts/Page';
+import { router } from '@inertiajs/react';
 
 const UserTable = () => {
   const [data, setData] = useState([]);
@@ -54,6 +55,13 @@ const UserTable = () => {
       onPageChange={handlePageChange}
       onRowsPerPageChange={handleRowsPerPageChange}
       title="Список пользователей"
+      additionl={()=>(<>
+        <button className='bg-blue-500 p-3 rounded-md text-white cursor-pointer active:bg-blue-500 hover:bg-blue-800 transition-colors'
+        onClick={() => router.get(route('users.create'))}
+        >
+          Добавить пользователя
+        </button>
+      </>)}
     />
     </Page>
   );

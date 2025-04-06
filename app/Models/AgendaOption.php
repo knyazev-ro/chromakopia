@@ -11,6 +11,7 @@ class AgendaOption extends Model
 
     protected $fillable = [
         'agenda_id',
+        'question',
         'agreed',
         'against',
         'abstained',
