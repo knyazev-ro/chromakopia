@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agenda;
+use App\Models\AgendaOption;
 use App\Models\Meeting;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -71,6 +72,7 @@ class AgendaController extends Controller
             'meeting_id' => 'required|exists:meetings,id',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
+            'agenda_option_id' => 'integer|nullable'
         ]);
 
         $agenda->update($request->all());
@@ -84,5 +86,21 @@ class AgendaController extends Controller
         $agenda->delete();
 
         return redirect()->back()->with('message', 'Agenda deleted successfully!');
+    }
+
+    public function agendaOptionUpdate(Request $request, int|bool $id=null){
+        $validated = $request->validate([
+            'agenda_id' => 'integer|exists:agendas,id',
+            'agreed' => 'array|nullable',
+            'against' => 'array|nullable',
+            'abstained' => 'array|nullable',
+            'attachments' => 'array|nullable',
+        ]);
+
+        if($id){
+            // AgendaOption::
+        }
+
+
     }
 }

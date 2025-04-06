@@ -26,6 +26,7 @@ import {
 import Page from '../Layouts/Page';
 import { PencilIcon } from '@heroicons/react/24/outline'
 import { router } from '@inertiajs/react';
+import AgendaOption from './AgendaOption';
 
 export default function Meeting({ meeting, agenda })
 {
@@ -40,73 +41,8 @@ export default function Meeting({ meeting, agenda })
     };
     return new Date(dateString).toLocaleString('ru-RU', options);
   };
-    
-      const renderVotingSection = (title, users, icon, color) => {
-        const safeUsers = Object.values(users) ?? [];
-        
-        return (
-          <Box sx={{ mb: 3 }}>
-            <Typography variant="h6" sx={{ mb: 1, color }}>
-              {icon} {title} ({safeUsers.length})
-            </Typography>
-            {safeUsers.length > 0 ? (
-              <List dense>
-                {safeUsers.map((user, index) => (
-                  <ListItem key={index}>
-                    <ListItemAvatar>
-                      <Avatar sx={{ bgcolor: `${color}.main` }}>
-                        <PersonIcon />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={user?.name || 'Неизвестный пользователь'}
-                      secondary={user?.email || 'Email не указан'}
-                    />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <Typography variant="body2" color="text.secondary">
-                Нет голосов
-              </Typography>
-            )}
-          </Box>
-        );
-      };
-    
-      const renderAttachments = (attachments) => {
-        const safeAttachments = Array.isArray(attachments) ? attachments : [];
-        
-        return (
-          <Box sx={{ mt: 2 }}>
-            <Typography variant="h6" sx={{ mb: 1 }}>
-              <LinkIcon /> Вложения ({safeAttachments.length})
-            </Typography>
-            {safeAttachments.length > 0 ? (
-              <ButtonGroup variant="outlined">
-                {safeAttachments.map((url, index) => (
-                  <Button
-                    key={index}
-                    component="a"
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    startIcon={<LinkIcon />}
-                  >
-                    Вложение {index + 1}
-                  </Button>
-                ))}
-              </ButtonGroup>
-            ) : (
-              <Typography variant="body2" color="text.secondary">
-                Нет вложений
-              </Typography>
-            )}
-          </Box>
-        );
-      };
-    
-      const agendaOptions = agenda?.agenda_options[0] || {};
+
+      const agendaOptions = agenda?.agenda_options || {};
 
       return (
         <Page>
@@ -152,36 +88,11 @@ export default function Meeting({ meeting, agenda })
     
             <Divider sx={{ my: 3 }} />
     
-            <Box sx={{ mb: 4 }}>
-              {/* Исправленное отображение названия повестки */}
-              <Typography variant="h5" gutterBottom>
-                Повестка дня: {agenda?.name || 'Название повестки не указано'}
-              </Typography>
-              <div className='flex gap-6 justify-start flex-wrap'>
-              {renderVotingSection(
-                'Проголосовали ЗА',
-                agendaOptions?.agreed ?? [],
-                <AgreedIcon color="success" />,
-                'success'
-              )}
-    
-              {renderVotingSection(
-                'Проголосовали ПРОТИВ',
-                agendaOptions?.against ?? [],
-                <AgainstIcon color="error" />,
-                'error'
-              )}
-    
-              {renderVotingSection(
-                'Воздержались',
-                agendaOptions?.abstained ?? [],
-                <AbstainedIcon color="warning" />,
-                'warning'
-              )}
-              </div>
-    
-              {renderAttachments(agendaOptions?.attachments)}
-            </Box>
+            {
+                agendaOptions.map(option => (
+                    <AgendaOption option={option} agenda={agenda}/>
+                ))
+            }
           </CardContent>
         </Card>
         </Page>

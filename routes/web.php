@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EntryController;
@@ -30,6 +31,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('users', UserController::class);
     Route::resource('meetings', MeetingController::class);
+
+    Route::post('/agenda-option/update/{id}', [AgendaController::class, 'agendaOptionUpdate'])->name('agenda-option.update');
 
 });
 
