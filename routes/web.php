@@ -19,7 +19,7 @@ Route::get('/project-resolve-pdf', [PDFprojectResolve::class, 'generateNotice'])
 Route::get('/support-sheet-pdf', [PDFsupportSheet::class, 'generateNotice']);
 
 Route::get('/test', function(){
-    return view('pdf.meeting');
+    return view('pdf.notification');
 });
 
 Route::get('/', function () {

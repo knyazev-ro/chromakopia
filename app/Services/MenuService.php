@@ -29,11 +29,11 @@ class MenuService
                 'icon' => '',
                 'href' => 'meetings.create',
             ],
-            [
-                'title' => 'Протоколы',
-                'icon' => '',
-                'href' => 'meetings.index',
-            ],
+            // [
+            //     'title' => 'Протоколы',
+            //     'icon' => '',
+            //     'href' => 'meetings.index',
+            // ],
             [
                 'title' => 'Пользователи',
                 'icon' => '',
@@ -60,17 +60,17 @@ class MenuService
             [
                 'title' => "Уведомления",
                 'icon' => '',
-                'href' => 'users.index',
+                'href' => 'calendar.index',
             ],
-            [
-                'title' => "Протоколы",
-                'icon' => '',
-                'href' => 'users.update',
-            ],
+            // [
+            //     'title' => "Протоколы",
+            //     'icon' => '',
+            //     'href' => 'users.update',
+            // ],
             [
                 'title' => "Опросники",
                 'icon' => '',
-                'href' => 'users.delete',
+                'href' => 'calendar.index',
             ]
         ];
 
