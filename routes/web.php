@@ -9,6 +9,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Redirect;
 
 use App\Http\Controllers\PDFnotification1F;
 use App\Http\Controllers\PDFprojectResolve;
@@ -23,7 +24,7 @@ Route::get('/test', function(){
 });
 
 Route::get('/', function () {
-    return Inertia::render('Dashboard');
+    return Redirect::to(route('calendar.index'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
