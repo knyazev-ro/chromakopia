@@ -55,8 +55,6 @@ cp .env.example .env
 
 ```
 
-4. Далее выполняем **ЕДИНОРАЗОВО ПРИ ПЕРВОЙ НАСТРОЙКЕ ПРОЕКТА** команду `docker exec chromakopia-backend sh docker/first_start.sh`
-
 Вставить:
 ```env
 DB_CONNECTION=mysql
@@ -67,12 +65,15 @@ DB_USERNAME=chromakopia_user
 DB_PASSWORD=123
 ```
 
+4. Далее выполняем **ЕДИНОРАЗОВО ПРИ ПЕРВОЙ НАСТРОЙКЕ ПРОЕКТА** команду `docker exec chromakopia-backend sh docker/first_start.sh`
+
+
 ### 7. Инициализация проекта
 После установки зависимостей выполни следующие команды:
 ```sh
 php artisan key:generate
 php artisan storage:link
-php artisan migrate:refresh --seed
+php artisan migrate:fresh --seed
 npm run dev
 php artisan serve
 ```
